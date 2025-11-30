@@ -1,3 +1,14 @@
 spring:
   application:
-    name: demo
+    name: Media-Service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mediaDb
+    username: root
+    password: ${DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show: true
