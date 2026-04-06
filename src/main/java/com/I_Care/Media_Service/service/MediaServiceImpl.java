@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,4 +40,11 @@ public class MediaServiceImpl implements MediaService {
     public Optional<MediaFile> getFile(Long id) {
         return mediaFileRepository.findById(id);
     }
+
+    @Override
+    public List<MediaFileDTO> getAllFiles() {
+        return mediaFileRepository.findAll().stream().map(MediaFile :: toDTO).toList();
+    }
+
+
 }

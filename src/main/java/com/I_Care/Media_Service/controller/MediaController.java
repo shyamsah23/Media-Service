@@ -3,6 +3,8 @@ package com.I_Care.Media_Service.controller;
 import com.I_Care.Media_Service.dto.MediaFileDTO;
 import com.I_Care.Media_Service.entity.MediaFile;
 import com.I_Care.Media_Service.service.MediaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +24,8 @@ public class MediaController {
     public MediaController(MediaService mediaService) {
         this.mediaService = mediaService;
     }
+
+    Logger logger = LoggerFactory.getLogger(MediaController.class);
 
     @PostMapping("/upload")
     public ResponseEntity<MediaFileDTO> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -43,4 +48,12 @@ public class MediaController {
                     .body(mediaFile.getData());
         } else return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MediaFileDTO>> getAllFiles() {
+        List<MediaFileDTO> mediaFiles = mediaService.getAllFiles();
+        return new ResponseEntity<>(mediaFiles,HttpStatus.OK);
+    }
+
+
 }

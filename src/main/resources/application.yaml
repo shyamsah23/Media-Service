@@ -3,10 +3,26 @@ spring:
     name: Media-Service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/mediaDb
+    url: jdbc:mysql://mysql-db:3306/mediadb?allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: ${DB_PASS}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: ${SERVER_PORT:8089}
+
+secret:
+  header:
+    key: ${SECRET_HEADER_KEY}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
 
   jpa:
     hibernate:

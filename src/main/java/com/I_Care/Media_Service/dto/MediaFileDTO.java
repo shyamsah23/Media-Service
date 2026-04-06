@@ -1,5 +1,6 @@
 package com.I_Care.Media_Service.dto;
 
+import com.I_Care.Media_Service.entity.MediaFile;
 import lombok.Builder;
 
 @Builder
@@ -49,5 +50,17 @@ public class MediaFileDTO {
 
     public void setSize(Long size) {
         this.size = size;
+    }
+
+    public MediaFile toEntity(){
+        return MediaFile.builder()
+                .id(id)
+                .name(name)
+                .type(type)
+                .size(size)
+                .data(null)
+                .storage(null)
+                .createdAt(null)
+                .build();
     }
 }

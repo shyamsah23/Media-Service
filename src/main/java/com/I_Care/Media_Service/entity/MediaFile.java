@@ -1,5 +1,6 @@
 package com.I_Care.Media_Service.entity;
 
+import com.I_Care.Media_Service.dto.MediaFileDTO;
 import com.I_Care.Media_Service.enums.Storage;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class MediaFile {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    private MediaFile() {
+    public MediaFile() {
     }
 
     public MediaFile(Long id, String name, String type, Long size, byte[] data, Storage storage, LocalDateTime createdAt) {
@@ -96,4 +97,7 @@ public class MediaFile {
         this.createdAt = createdAt;
     }
 
+    public MediaFileDTO toDTO(){
+        return new MediaFileDTO(id,name,type,size);
+    }
 }
